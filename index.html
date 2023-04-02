@@ -10,6 +10,41 @@
     <meta charset="UTF-8">
     <title>подъемный кран</title>
     <b><p><big><big><big>zдравствуй путник добро пожаловать на pepen40.ru</big></big></big></p></b>
+     <h1></h1>
+    <div id="timer"></div>
+    <body>
+    <script>
+      // Задаем дату, до которой нужно отсчитывать время
+      var countDownDate = new Date("June 1, 2023 00:00:00").getTime();
+
+      // Обновляем таймер каждую секунду
+      var x = setInterval(function() {
+
+        // Получаем текущую дату и время
+        var now = new Date().getTime();
+
+        // Вычисляем время, оставшееся до countDownDate
+        var distance = countDownDate - now;
+
+        // Вычисляем количество дней, часов, минут и секунд
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Отображаем время в элементе с id "timer"
+        document.getElementById("timer").innerHTML = days + " дней " + hours + " часов "
+        + minutes + " минут " + seconds + " секунд ";
+
+        // Если время истекло, выводим сообщение
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("timer").innerHTML = "Время истекло";
+        }
+      }, 1000);
+    </script>
+    <br>
+    <br>
     <img src="soplyak123.jpg" width="300" height="250" alt="павильон">
     <br>
     <a href="https://pepen40.github.io/cinema/"><img src="kinoteatr.jpg" width="200" height="100" ></a>
@@ -35,8 +70,11 @@
     <br>
     
 </head>
-<body>
-<body>
+
+ 
+  </body>
+</html>
+ 
 <!--LiveInternet counter-->
     <a href="https://www.liveinternet.ru/click"
 

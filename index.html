@@ -46,6 +46,28 @@
     </script>
     <br>
     <br>
+        <a href="#" id="random-post-link">СЛУЧАЙНЫЙ ПОСТ С КАНАЛА</a>
+
+<script>
+  // Максимальный номер поста в канале pepen40
+  const MAX_POST_ID = 33263;
+
+  document.getElementById('random-post-link').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    // Случайное число от 1 до MAX_POST_ID включительно
+    const randomId = Math.floor(Math.random() * MAX_POST_ID) + 1;
+
+    // Ссылка на пост
+    const url = 'https://t.me/pepen40/' + randomId;
+
+    // Открываем в новой вкладке
+    window.open(url, '_blank');
+  });
+</script>
+
+<br>
+    <br>
     <img src="soplyak123.jpg" width="300" height="250" alt="павильон">
         
     <br>

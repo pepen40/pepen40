@@ -106,6 +106,100 @@
 
  
   </body>
+
+<!-- ===== НАЧАЛО КОДА ЧАТА ===== -->
+<div id="chat-container" style="max-width: 600px; margin: 40px auto; padding: 20px; border: 3px solid #333; border-radius: 14px; background: #fff4e0; font-family: sans-serif;">
+  <h3 style="margin-top:0; color: #333;">ЧАТ САЙТА</h3>
+  
+  <div id="chat-messages" style="height: 300px; overflow-y: auto; border: 2px solid #333; border-radius: 8px; padding: 10px; margin-bottom: 10px; background: #fff;"></div>
+  
+  <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+    <input id="chat-name" type="text" placeholder="твоё имя" maxlength="20" style="flex: 1; padding: 10px; border: 2px solid #333; border-radius: 6px; font-family: inherit;">
+  </div>
+  
+  <div style="display: flex; gap: 8px;">
+    <input id="chat-input" type="text" placeholder="напиши сообщение..." maxlength="200" style="flex: 1; padding: 10px; border: 2px solid #333; border-radius: 6px; font-family: inherit;">
+    <button id="chat-send" style="padding: 10px 20px; background: #333; color: #ffbd6a; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">ОТПРАВИТЬ</button>
+  </div>
+</div>
+
+<script type="module">
+  // Подключаем библиотеку Supabase
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+  // ТВОИ КЛЮЧИ (уже вставлены)
+  const SUPABASE_URL = 'https://qgqxisirduepwmyaeyrr.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncXhpc2lyZHVlcHdteWFleXJyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI4MTM3MDIsImV4cCI6MjEwODM4OTcwMn0.tnIEH8ClZOZSUXQhaWdz2jY0lXy6cIbYr7NhNfibEwY';
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const messagesEl = document.getElementById('chat-messages');
+  const nameInput = document.getElementById('chat-name');
+  const msgInput = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('chat-send');
+
+  // Функция для вывода сообщения на экран
+  function renderMessage(msg) {
+    const div = document.createElement('div');
+    div.style.marginBottom = '8px';
+    div.style.color = '#333';
+    div.innerHTML = `<b>${escapeHtml(msg.username)}:</b> ${escapeHtml(msg.content)}`;
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight; // Скроллим вниз
+  }
+
+  // Защита от дурака (чтобы нельзя было вставить HTML-теги в чат)
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // 1. Загружаем старые сообщения при открытии сайта
+  const { data: oldMessages } = await supabase
+    .from('messages')
+    .select('*')
+    .order('created_at', { ascending: true })
+    .limit(100);
+
+  oldMessages?.forEach(renderMessage);
+
+  // 2. Слушаем новые сообщения (Realtime)
+  supabase
+    .channel('public:messages')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
+      renderMessage(payload.new);
+    })
+    .subscribe();
+
+  // 3. Отправка сообщения
+  sendBtn.addEventListener('click', async () => {
+    const username = nameInput.value.trim() || 'аноним';
+    const content = msgInput.value.trim();
+    if (!content) return;
+
+    sendBtn.disabled = true; // Блокируем кнопку на время отправки
+
+    const { error } = await supabase.from('messages').insert({ username, content });
+    
+    if (error) {
+      alert('Ошибка: ' + error.message);
+      console.error(error);
+    } else {
+      msgInput.value = ''; // Очищаем поле после успешной отправки
+    }
+    
+    sendBtn.disabled = false;
+    msgInput.focus();
+  });
+
+  // Отправка по нажатию на Enter
+  msgInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendBtn.click();
+  });
+</script>
+<!-- ===== КОНЕЦ КОДА ЧАТА ===== -->
+
 </html>
  
 <!--LiveInternet counter-->

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>  
+    <style>      
+       body{ 
+            background-color:#ffbd6a
+        }
+        
+    </style>
+    <meta charset="UTF-8">
+    <title>подъемный кран</title>
+    <b><p><big><big><big>здравствуй путник добро пожаловать на pepen40.ru</big></big></big></p></b>
+     <h1></h1>
+    <div id="timer"></div>
+    <body>
+        
+    <script>
+      // Задаем дату, до которой нужно отсчитывать время
+      var countDownDate = new Date("December 31, 2026 23:59:00").getTime();
+
+      // Обновляем таймер каждую секунду
+      var x = setInterval(function() {
+
+        // Получаем текущую дату и время
+        var now = new Date().getTime();
+
+        // Вычисляем время, оставшееся до countDownDate
+        var distance = countDownDate - now;
+
+        // Вычисляем количество дней, часов, минут и секунд
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Отображаем время в элементе с id "timer"
+        document.getElementById("timer").innerHTML = days + " дней " + hours + " часов "
+        + minutes + " минут " + seconds + " секунд ";
+
+        // Если время истекло, выводим сообщение
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("timer").innerHTML = "Время истекло";
+        }
+      }, 1000);
+    </script>
+    <br>
+    <br>
+        <a href="#" id="random-post-link">СЛУЧАЙНЫЙ ПОСТ С КАНАЛА</a>
+
+<script>
+  // Максимальный номер поста в канале pepen40
+  const MAX_POST_ID = 33263;
+
+  document.getElementById('random-post-link').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    // Случайное число от 1 до MAX_POST_ID включительно
+    const randomId = Math.floor(Math.random() * MAX_POST_ID) + 19653;
+
+    // Ссылка на пост
+    const url = 'https://t.me/pepen40/' + randomId;
+
+    // Открываем в новой вкладке
+    window.open(url, '_blank');
+  });
+</script>
+
+<br>
+    <br>
+    <img src="soplyak123.jpg" width="300" height="250" alt="павильон">
+        
+    <br>
+    <a href="https://pepen40.github.io/cinema/"><img src="kinoteatr.jpg" width="200" height="100" ></a>
+    <br>
+    <br>
+    <a href="https://pepen40.github.io/games/"><img src="igrashka.jpg" width="200" height="100" alt="game">
+    </a>
+        <br>
+        <br>
+        <a href="https://pepen40.github.io/GtaVI"><img src="Gtashka.jpg" width="200" height="100" alt="Gta"></a>
+    <br>
+    <br>
+    <a href="https://pepen40.github.io/zagadka/"><img src="zagadka.jpg" width="200" height="100" alt="nn"></a>
+
+    <br>
+    <br>
+        <a href="https://pepen40.github.io/Zavodik/"><img src="Zavodik.jpg" width="200" height="100" alt="istoria"></a>
+   <br>
+        <br>
+        <a href="https://pepen40.github.io/knigi/"><img src="book.jpg" width="200" height="100" alt="vvv"></a>
+        <br>
+        <br>
+         <a href="https://pepen40.github.io/donate"><img src= "boosty.png" width="200" height="100" alt="boost"></a>
+        <br>
+        <br>
+        <a href="https://pepen40.github.io/gallery"><img src= "gallery.jpg" width="200" height="100" alt="gallery"</a>
+        <br>
+        <br>
+        <a href="https://t.me/pepen40" ><img src="pilesos.jpg" width="200"
+    height="100" alt="ziziz"></a>
+    <br>
+    <br>
+    
+</head>
+
+ 
+  </body>
+</html>
+ 
+<!--LiveInternet counter-->
+    <a href="https://www.liveinternet.ru/click"
+
+target="_blank"><img id="licnt06E0" width="88" height="120" style="border:0" 
+
+title="LiveInternet: показано количество просмотров и посетителей"
+
+src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+
+alt=""/></a><script>(function(d,s){d.getElementById("licnt06E0").src=
+
+"https://counter.yadro.ru/hit?t28.6;r"+escape(d.referrer)+
+
+((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+
+(s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+
+";h"+escape(d.title.substring(0,150))+";"+Math.random()})
+
+(document,screen)</script><!--/LiveInternet-->
+   
+</body>
+</html>
